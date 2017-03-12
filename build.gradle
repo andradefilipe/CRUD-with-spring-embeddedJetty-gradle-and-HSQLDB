@@ -1,0 +1,54 @@
+// Apply the java plugin to add support for Java
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: "org.akhikhl.gretty"
+
+
+defaultTasks "build"
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	providedCompile "javax.servlet:servlet-api:2.5"
+	compile 'org.springframework:spring-webmvc:3.2.3.RELEASE'
+	compile 'org.hsqldb:hsqldb:2.3.1'
+	compile 'org.springframework:spring-jdbc:4.1.0.RELEASE'
+	compile 'log4j:log4j:1.2.17'
+	compile 'org.slf4j:slf4j-api:1.7.5'
+	compile 'org.slf4j:slf4j-log4j12:1.7.5'
+	runtime 'com.fasterxml.jackson.core:jackson-core:2.2.2'
+	runtime 'com.fasterxml.jackson.core:jackson-databind:2.2.2'
+
+	testCompile 'junit:junit:4.11'
+}
+
+
+buildscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath "org.akhikhl.gretty:gretty:1.4.0"
+  }
+}
+
+//Gretty Embedded Jetty
+buildscript {
+  repositories {
+    jcenter()
+  }
+
+  dependencies {
+    classpath 'org.akhikhl.gretty:gretty:+'
+  }
+}
+
+gretty {
+  httpPort = 8081
+  contextPath = 'spring4'
+  servletContainer = 'jetty9' //tomcat7 or tomcat8
+}
