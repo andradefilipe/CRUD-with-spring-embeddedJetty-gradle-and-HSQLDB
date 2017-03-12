@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.andrade.model.User;
 
-public interface UserDao {
+public interface IUserDao {
 
 	User findByName(String name);
 

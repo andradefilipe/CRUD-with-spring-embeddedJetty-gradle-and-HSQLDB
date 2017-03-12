@@ -15,7 +15,7 @@ public class UserDaoTest {
 
 	private EmbeddedDatabase db;
 
-	UserDao userDao;
+	UserDaoImpl userDao;
 
 	@Before
 	public void setUp() {
@@ -33,7 +33,6 @@ public class UserDaoTest {
 		User user = userDao.findByName("andrade");
 
 		Assert.assertNotNull(user);
-		Assert.assertEquals(1, user.getId().intValue());
 		Assert.assertEquals("andrade", user.getName());
 		Assert.assertEquals("andrade@gmail.com", user.getEmail());
 

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import com.andrade.model.User;
 
 @Repository
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl implements IUserDao {
 
 	NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
@@ -23,7 +23,6 @@ public class UserDaoImpl implements UserDao {
 		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
 	}
 
-	@Override
 	public User findByName(String name) {
 
 		Map<String, Object> params = new HashMap<>();
@@ -39,7 +38,6 @@ public class UserDaoImpl implements UserDao {
 
 	}
 
-	@Override
 	public List<User> findAll() {
 
 		Map<String, Object> params = new HashMap<>();
@@ -57,11 +55,11 @@ public class UserDaoImpl implements UserDao {
 		@Override
 		public User mapRow(ResultSet rs, int rowNum) throws SQLException {
 			User user = new User();
-			user.setId(rs.getInt("id"));
 			user.setName(rs.getString("name"));
 			user.setEmail(rs.getString("email"));
 			return user;
 		}
 	}
+
 
 }
